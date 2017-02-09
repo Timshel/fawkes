@@ -63,6 +63,8 @@ Tab.prototype = {
     this.id = tab.id;
     this.iframe.setAttribute("data-tab-id", this.id);
 
+    this.tab = tab;
+
     this.addListeners();
     if (!this.iframe.parentNode) {
       document.body.appendChild(this.iframe);
@@ -157,7 +159,8 @@ Tab.prototype = {
         chrome.tabs.create({
           url: event.detail.url,
           active: true,
-          openerTabId: this.id
+          openerTabId: this.id,
+          sessionId: this.tab.sessionId
         });
         break;
       case "mozbrowsershowmodalprompt":

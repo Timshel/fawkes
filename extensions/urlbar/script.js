@@ -34,6 +34,8 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   }
 
   let urlbar = document.getElementById('urlbar');
+  let sessionId = document.getElementById('sessionId');
+
   if (currentTab != tabId) {
     currentTab = tabId;
     // If we are switching to a new tab, blur the urlbar
@@ -54,6 +56,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
       urlbar.value = "";
     }
   }
+  sessionId.innerHTML = tab.sessionId;
 
   // Update the stop or reload button
   let state = tab.status == "loading" ? "stop" : "reload";
